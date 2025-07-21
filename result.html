@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top Restaurant Recommendations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: rgba(226, 55, 68, 0.95);
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background-color: rgba(255, 255, 255, 0.95); /* semi-transparent white */
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #e23744;
+            margin: 0;
+            padding-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        th, td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #fbeaea;
+            color: #e23744;
+        }
+
+        tr:hover {
+            background-color: #fff5f5;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        🍽️ Restaurant Recommendation System
+    </div>
+
+    <div class="container">
+        <h2>Top Restaurant Recommendations</h2>
+
+        {% if results %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Restaurant Name</th>
+                    <th>City</th>
+                    <th>Cuisine</th>
+                    <th>Food Item</th>
+                    <th>Rating</th>
+                    <th>Address</th>
+                    <th>Map</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in results %}
+                <tr>
+                    <td>{{ row.Restaurant_Name }}</td>
+                    <td>{{ row.City }}</td>
+                    <td>{{ row.Cuisine }}</td>
+                    <td>{{ row.Food_Item }}</td>
+                    <td>{{ row.Rating }}</td>
+                    <td>{{ row.Address }}</td>
+                    <td><a href="{{ row.maps_url }}" target="_blank">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
